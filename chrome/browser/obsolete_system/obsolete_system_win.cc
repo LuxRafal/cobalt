@@ -23,7 +23,7 @@ base::win::Version GetRealOSVersion() {
 }
 
 bool IsObsoleteOsVersion() {
-  return GetRealOSVersion() < base::win::Version::WIN10;
+  return GetRealOSVersion() < base::win::Version::VERSION_WIN10; // TODO: GOOGAMCONS-164
 }
 
 }  // namespace
