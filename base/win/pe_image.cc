@@ -15,6 +15,8 @@
 #include "base/no_destructor.h"
 #include "base/win/current_module.h"
 
+#include <WinBase.h>
+
 namespace base {
 namespace win {
 
@@ -409,7 +411,7 @@ bool PEImage::EnumImportChunks(EnumImportChunksFunction callback,
         reinterpret_cast<PIMAGE_THUNK_DATA>(RVAToAddr(import->FirstThunk));
 
     if (target_module_name == nullptr ||
-        (lstrcmpiA(module_name, target_module_name) == 0)) {
+        (::lstrcmpiA(module_name, target_module_name) == 0)) {
       if (!callback(*this, module_name, name_table, iat, cookie))
         return false;
     }
@@ -494,7 +496,7 @@ bool PEImage::EnumDelayImportChunks(EnumDelayImportChunksFunction callback,
     }
 
     if (target_module_name == nullptr ||
-        (lstrcmpiA(module_name, target_module_name) == 0)) {
+        (::lstrcmpiA(module_name, target_module_name) == 0)) {
       if (target_module_name) {
         // Ensure all imports are properly loaded for the target module so that
         // the callback is operating on a fully-realized set of imports.
