@@ -70,7 +70,7 @@ int GetPreRS5UniversalApiContractVersion() {
   // different results depending on compatibility mode, and is spoofable).
   // See crbug.com/1404448.
   const base::win::Version version = base::win::OSInfo::Kernel32Version();
-  if (version == base::win::Version::WIN10) {
+  if (version == base::win::Version::VERSION_WIN10) { // FIX: GOOGAMCONS-164
     return 1;
   }
   if (version == base::win::Version::WIN10_TH2) {
