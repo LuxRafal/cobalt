@@ -41,6 +41,7 @@ _platforms = [
     'linux',
     'mac',
     'windows',
+    'winuwp' # TODO: GOOGAMCONS-164
 ]
 
 _form_factors = [
@@ -52,6 +53,10 @@ _form_factors = [
 # Convert a platform argument to the matching Platform enum value in
 # components/variations/proto/study.proto.
 def _PlatformEnumValue(platform):
+  # TODO: GOOGAMCONS-164: Immediate fix needed.
+  if platform == "winuwp":
+    platform = "windows"
+  
   assert platform in _platforms
   return 'Study::PLATFORM_' + platform.upper()
 
