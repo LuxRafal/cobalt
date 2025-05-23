@@ -313,13 +313,13 @@ auto RunMediaParserFactory(
 }
 #endif  // BUILDFLAG(ENABLE_EXTENSIONS) || BUILDFLAG(IS_ANDROID)
 
-#if BUILDFLAG(ENABLE_PRINT_PREVIEW) || \
-    (BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_WIN))
-auto RunPrintingService(
-    mojo::PendingReceiver<printing::mojom::PrintingService> receiver) {
-  return std::make_unique<printing::PrintingService>(std::move(receiver));
-}
-#endif
+// #if BUILDFLAG(ENABLE_PRINT_PREVIEW) || \
+//     (BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_WIN))
+// auto RunPrintingService(
+//     mojo::PendingReceiver<printing::mojom::PrintingService> receiver) {
+//   return std::make_unique<printing::PrintingService>(std::move(receiver));
+// }
+// #endif
 
 #if BUILDFLAG(ENABLE_PAINT_PREVIEW)
 auto RunPaintPreviewCompositor(
@@ -346,14 +346,14 @@ auto RunPrintingUnsandboxedPrintBackendHost(
 }
 #endif  // BUILDFLAG(ENABLE_OOP_PRINTING)
 
-#if BUILDFLAG(ENABLE_PRINTING)
-auto RunPrintCompositor(
-    mojo::PendingReceiver<printing::mojom::PrintCompositor> receiver) {
-  return std::make_unique<printing::PrintCompositorImpl>(
-      std::move(receiver), true /* initialize_environment */,
-      content::UtilityThread::Get()->GetIOTaskRunner());
-}
-#endif  // BUILDFLAG(ENABLE_PRINTING)
+// #if BUILDFLAG(ENABLE_PRINTING)
+// auto RunPrintCompositor(
+//     mojo::PendingReceiver<printing::mojom::PrintCompositor> receiver) {
+//   return std::make_unique<printing::PrintCompositorImpl>(
+//       std::move(receiver), true /* initialize_environment */,
+//       content::UtilityThread::Get()->GetIOTaskRunner());
+// }
+// #endif  // BUILDFLAG(ENABLE_PRINTING)
 
 #if BUILDFLAG(IS_CHROMEOS_ASH)
 auto RunImeService(
@@ -467,9 +467,9 @@ void RegisterMainThreadServices(mojo::ServiceFactory& services) {
   services.Add(RunSystemSignalsService);
 #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
 
-#if BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_CHROMEOS_ASH)
-  services.Add(RunCupsIppParser);
-#endif
+// #if BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_CHROMEOS_ASH)
+//   services.Add(RunCupsIppParser);
+// #endif
 
 #if BUILDFLAG(IS_MAC)
   services.Add(RunMacNotificationService);
@@ -492,19 +492,19 @@ void RegisterMainThreadServices(mojo::ServiceFactory& services) {
   services.Add(RunMediaParserFactory);
 #endif
 
-#if BUILDFLAG(ENABLE_PRINT_PREVIEW) || \
-    (BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_WIN))
-  services.Add(RunPrintingService);
-#endif
+// #if BUILDFLAG(ENABLE_PRINT_PREVIEW) || \
+//     (BUILDFLAG(ENABLE_PRINTING) && BUILDFLAG(IS_WIN))
+//   services.Add(RunPrintingService);
+// #endif
 
 #if BUILDFLAG(ENABLE_OOP_PRINTING)
   services.Add(RunPrintingSandboxedPrintBackendHost);
   services.Add(RunPrintingUnsandboxedPrintBackendHost);
 #endif
 
-#if BUILDFLAG(ENABLE_PRINTING)
-  services.Add(RunPrintCompositor);
-#endif
+// #if BUILDFLAG(ENABLE_PRINTING)
+//   services.Add(RunPrintCompositor); // GOOGAMCONS-164: TODO: TEMP REMOVAL
+// #endif
 
 #if BUILDFLAG(ENABLE_PAINT_PREVIEW)
   services.Add(RunPaintPreviewCompositor);
