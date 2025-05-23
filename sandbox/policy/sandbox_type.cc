@@ -358,10 +358,10 @@ sandbox::mojom::Sandbox UtilitySandboxTypeFromString(
 #endif
   if (sandbox_string == switches::kCdmSandbox)
     return Sandbox::kCdm;
-#if BUILDFLAG(ENABLE_OOP_PRINTING)
-  if (sandbox_string == switches::kPrintBackendSandbox)
-    return Sandbox::kPrintBackend;
-#endif
+// #if BUILDFLAG(ENABLE_OOP_PRINTING)
+//   if (sandbox_string == switches::kPrintBackendSandbox)
+//     return Sandbox::kPrintBackend; // TODO: GOOGAMCONS-164
+// #endif
   if (sandbox_string == switches::kPrintCompositorSandbox)
     return Sandbox::kPrintCompositor;
 #if BUILDFLAG(IS_WIN)
