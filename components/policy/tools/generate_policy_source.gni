@@ -58,12 +58,18 @@ template("generate_policy_source") {
       chrome_settings_proto_path,
       cloud_policy_proto_path,
     ]
+
+    # TODO: GOOGAMCONS-164
+    temp_gen_target_os = target_os
+    if(target_os == "winuwp") {
+      temp_gen_target_os = "win"
+    }
     args = [
       # Input information.
       "--chrome-version-file=" + chrome_version_path,
       "--policy-templates-file=" +
           rebase_path(policy_templates_generated_json_path, root_build_dir),
-      "--target-platform=" + target_os,
+      "--target-platform=" + temp_gen_target_os,
     ]
     if (!chunking) {
       args += [ "--no-chunking" ]
