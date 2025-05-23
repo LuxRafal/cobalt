@@ -200,7 +200,7 @@ static_library("browser") {
     "bookmarks/bookmark_model_factory.h",
     "bookmarks/chrome_bookmark_client.cc",
     "bookmarks/chrome_bookmark_client.h",
-    "bookmarks/managed_bookmark_service_factory.cc",
+
     "bookmarks/managed_bookmark_service_factory.h",
     "browser_about_handler.cc",
     "browser_about_handler.h",
@@ -223,7 +223,7 @@ static_library("browser") {
     "browsing_data/browsing_data_history_observer_service.h",
     "browsing_data/browsing_data_important_sites_util.cc",
     "browsing_data/browsing_data_important_sites_util.h",
-    "browsing_data/browsing_data_lifetime_policy_handler.cc",
+    
     "browsing_data/browsing_data_lifetime_policy_handler.h",
     "browsing_data/chrome_browsing_data_lifetime_manager.cc",
     "browsing_data/chrome_browsing_data_lifetime_manager.h",
@@ -664,7 +664,7 @@ static_library("browser") {
     "lookalikes/safety_tip_ui_helper.h",
     "lookalikes/safety_tip_web_contents_observer.cc",
     "lookalikes/safety_tip_web_contents_observer.h",
-    "media/audio_service_util.cc",
+    
     "media/audio_service_util.h",
     "media/history/media_history_contents_observer.cc",
     "media/history/media_history_contents_observer.h",
@@ -849,7 +849,7 @@ static_library("browser") {
     "net/dns_probe_service.h",
     "net/dns_probe_service_factory.cc",
     "net/dns_probe_service_factory.h",
-    "net/explicitly_allowed_network_ports_policy_handler.cc",
+    
     "net/explicitly_allowed_network_ports_policy_handler.h",
     "net/net_error_diagnostics_dialog.h",
     "net/net_error_tab_helper.cc",
@@ -870,13 +870,13 @@ static_library("browser") {
     "net/referrer.h",
     "net/secure_dns_config.cc",
     "net/secure_dns_config.h",
-    "net/secure_dns_policy_handler.cc",
+    
     "net/secure_dns_policy_handler.h",
     "net/secure_dns_util.cc",
     "net/secure_dns_util.h",
     "net/stub_resolver_config_reader.cc",
     "net/stub_resolver_config_reader.h",
-    "net/system_network_context_manager.cc",
+    
     "net/system_network_context_manager.h",
     "net_benchmarking.cc",
     "net_benchmarking.h",
@@ -1138,11 +1138,11 @@ static_library("browser") {
     "plugins/pdf_iframe_navigation_throttle.h",
     "policy/boolean_disabling_policy_handler.cc",
     "policy/boolean_disabling_policy_handler.h",
-    "policy/chrome_browser_policy_connector.cc",
+    
     "policy/chrome_browser_policy_connector.h",
     "policy/chrome_policy_conversions_client.cc",
     "policy/chrome_policy_conversions_client.h",
-    "policy/cloud/cloud_policy_invalidator.cc",
+    
     "policy/cloud/cloud_policy_invalidator.h",
     "policy/cloud/policy_invalidation_util.cc",
     "policy/cloud/policy_invalidation_util.h",
@@ -1154,15 +1154,15 @@ static_library("browser") {
     "policy/cloud/user_cloud_policy_invalidator.h",
     "policy/cloud/user_cloud_policy_invalidator_factory.cc",
     "policy/cloud/user_cloud_policy_invalidator_factory.h",
-    "policy/configuration_policy_handler_list_factory.cc",
+    
     "policy/configuration_policy_handler_list_factory.h",
     "policy/device_management_service_configuration.cc",
     "policy/device_management_service_configuration.h",
     "policy/dm_token_utils.cc",
     "policy/dm_token_utils.h",
-    "policy/homepage_location_policy_handler.cc",
+    
     "policy/homepage_location_policy_handler.h",
-    "policy/javascript_policy_handler.cc",
+    
     "policy/javascript_policy_handler.h",
     "policy/management_utils.cc",
     "policy/management_utils.h",
@@ -1220,7 +1220,7 @@ static_library("browser") {
     "policy/value_provider/policy_value_provider.h",
     "policy/value_provider/value_provider_util.cc",
     "policy/value_provider/value_provider_util.h",
-    "policy/webusb_allow_devices_for_urls_policy_handler.cc",
+    
     "policy/webusb_allow_devices_for_urls_policy_handler.h",
     "power_bookmarks/power_bookmark_service_factory.cc",
     "power_bookmarks/power_bookmark_service_factory.h",
@@ -1347,7 +1347,7 @@ static_library("browser") {
     "privacy/privacy_metrics_service.h",
     "privacy/privacy_metrics_service_factory.cc",
     "privacy/privacy_metrics_service_factory.h",
-    "privacy_sandbox/privacy_sandbox_policy_handler.cc",
+    
     "privacy_sandbox/privacy_sandbox_policy_handler.h",
     "privacy_sandbox/privacy_sandbox_service.cc",
     "privacy_sandbox/privacy_sandbox_service.h",
@@ -1368,11 +1368,11 @@ static_library("browser") {
     "profiles/chrome_browser_main_extra_parts_profiles.h",
     "profiles/chrome_version_service.cc",
     "profiles/chrome_version_service.h",
-    "profiles/force_safe_search_policy_handler.cc",
+    
     "profiles/force_safe_search_policy_handler.h",
-    "profiles/force_youtube_safety_mode_policy_handler.cc",
+    
     "profiles/force_youtube_safety_mode_policy_handler.h",
-    "profiles/incognito_mode_policy_handler.cc",
+    
     "profiles/incognito_mode_policy_handler.h",
     "profiles/keep_alive/profile_keep_alive_types.cc",
     "profiles/keep_alive/profile_keep_alive_types.h",
@@ -1680,7 +1680,7 @@ static_library("browser") {
     "ssl/sct_reporting_service.h",
     "ssl/sct_reporting_service_factory.cc",
     "ssl/sct_reporting_service_factory.h",
-    "ssl/secure_origin_policy_handler.cc",
+    
     "ssl/secure_origin_policy_handler.h",
     "ssl/secure_origin_prefs_observer.cc",
     "ssl/secure_origin_prefs_observer.h",
@@ -1843,6 +1843,28 @@ static_library("browser") {
     "webid/federated_identity_permission_context.h",
     "webid/federated_identity_permission_context_factory.cc",
     "webid/federated_identity_permission_context_factory.h",
+  ]
+
+ # GOOGAMCONS-164: TODO: Review if uwp version is required for below source files.
+  sources += [
+    "bookmarks/managed_bookmark_service_factory.cc",
+    "browsing_data/browsing_data_lifetime_policy_handler.cc",
+    "net/explicitly_allowed_network_ports_policy_handler.cc",
+    "media/audio_service_util.cc",
+    "net/system_network_context_manager.cc",
+    "net/secure_dns_policy_handler.cc",
+    "policy/configuration_policy_handler_list_factory.cc",
+    "policy/chrome_browser_policy_connector.cc",
+    "policy/cloud/cloud_policy_invalidator.cc",
+    "policy/javascript_policy_handler.cc",
+    "policy/homepage_location_policy_handler.cc",
+    "policy/webusb_allow_devices_for_urls_policy_handler.cc",
+    "profiles/force_youtube_safety_mode_policy_handler.cc",
+    "privacy_sandbox/privacy_sandbox_policy_handler.cc",
+    "profiles/force_safe_search_policy_handler.cc",
+    "profiles/incognito_mode_policy_handler.cc",
+    "ssl/secure_origin_policy_handler.cc",
+    "download/default_download_dir_policy_handler.cc",
   ]
 
   configs += [
@@ -3591,7 +3613,7 @@ static_library("browser") {
       "download/bubble/download_display_controller.cc",
       "download/bubble/download_display_controller.h",
       "download/bubble/download_icon_state.h",
-      "download/default_download_dir_policy_handler.cc",
+      
       "download/default_download_dir_policy_handler.h",
       "download/download_auto_open_policy_handler.cc",
       "download/download_auto_open_policy_handler.h",
