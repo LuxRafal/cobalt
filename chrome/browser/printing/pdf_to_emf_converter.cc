@@ -226,17 +226,17 @@ void PdfConverterImpl::Initialize(scoped_refptr<base::RefCountedMemory> data) {
 
   PRINTER_LOG(EVENT) << "PdfConverter created. Mode: " << settings_.mode;
   memcpy(memory.mapping.memory(), data->front(), data->size());
+// TODO: GOOGAMCONS-164: Fix linker
+  // GetPrintingService()->BindPdfToEmfConverterFactory(
+  //     pdf_to_emf_converter_factory_.BindNewPipeAndPassReceiver());
+  // pdf_to_emf_converter_factory_.set_disconnect_handler(base::BindOnce(
+  //     &PdfConverterImpl::OnFailed, weak_ptr_factory_.GetWeakPtr(),
+  //     std::string("Connection to PdfToEmfConverterFactory error.")));
 
-  GetPrintingService()->BindPdfToEmfConverterFactory(
-      pdf_to_emf_converter_factory_.BindNewPipeAndPassReceiver());
-  pdf_to_emf_converter_factory_.set_disconnect_handler(base::BindOnce(
-      &PdfConverterImpl::OnFailed, weak_ptr_factory_.GetWeakPtr(),
-      std::string("Connection to PdfToEmfConverterFactory error.")));
-
-  pdf_to_emf_converter_factory_->CreateConverter(
-      std::move(memory.region), settings_,
-      base::BindOnce(&PdfConverterImpl::OnPageCount,
-                     weak_ptr_factory_.GetWeakPtr()));
+  // pdf_to_emf_converter_factory_->CreateConverter(
+  //     std::move(memory.region), settings_,
+  //     base::BindOnce(&PdfConverterImpl::OnPageCount,
+  //                    weak_ptr_factory_.GetWeakPtr()));
 }
 
 void PdfConverterImpl::OnPageCount(
