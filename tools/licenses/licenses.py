@@ -652,7 +652,8 @@ def GetThirdPartyDepsFromGNDepsOutput(
 
   third_party_deps = set()
   for absolute_build_dep in gn_deps.split():
-    relative_build_dep = os.path.relpath(absolute_build_dep, _REPOSITORY_ROOT)
+    # TODO: GOOGAMCONS-164: Path to build directory is required. Replace with your path.
+    relative_build_dep = os.path.relpath("D:\\Work\\cobalt\\bitbucket_26\\repo\\src\\out\\uwp_f")#(absolute_build_dep, _REPOSITORY_ROOT)
     m = path_regex.search(relative_build_dep)
     if not m:
       continue
