@@ -31,7 +31,7 @@ class OriginTrialsFactory : public ProfileKeyedServiceFactory {
   friend struct base::LazyInstanceTraitsBase<OriginTrialsFactory>;
 
   OriginTrialsFactory();
-  ~OriginTrialsFactory() override;
+  ~OriginTrialsFactory() noexcept override; // FIX: GOOGAMCONS-164
 
   // BrowserContextKeyedServiceFactory:
   KeyedService* BuildServiceInstanceFor(
