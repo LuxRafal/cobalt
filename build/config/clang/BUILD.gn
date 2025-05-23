@@ -63,7 +63,16 @@ config("find_bad_constructs") {
 # compile with these so may want to remove this config.
 config("extra_warnings") {
   cflags = [
-    "-Wheader-hygiene",
+    # "-Wheader-hygiene", # # TODO: GOOGAMCONS-164
+    "-Wno-reorder-ctor", # TODO: GOOGAMCONS-164
+    "-Wno-deprecated-declarations", # TODO: GOOGAMCONS-164
+    "-Wno-ignored-attributes", # TODO: GOOGAMCONS-164
+    "-Wno-suggest-destructor-override", # TODO: GOOGAMCONS-164
+    "-Wno-missing-field-initializers", # TODO: GOOGAMCONS-164
+    "-Wno-microsoft-exception-spec", # TODO: GOOGAMCONS-164
+    "-Wno-unused-private-field", # TODO: GOOGAMCONS-164
+
+
 
     # Warns when a const char[] is converted to bool.
     "-Wstring-conversion",
