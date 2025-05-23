@@ -202,7 +202,7 @@ void DoPostUninstallOperations(const base::Version& version,
     url += distribution_data;
   }
 
-  if (os_info->version() < base::win::Version::WIN10 ||
+  if (os_info->version() < base::win::Version::VERSION_WIN10 || // TODO: GOOGAMCONS-164
       !NavigateToUrlWithEdge(url)) {
     NavigateToUrlWithIExplore(url);
   }

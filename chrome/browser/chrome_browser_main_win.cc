@@ -592,7 +592,7 @@ void ChromeBrowserMainPartsWin::PostBrowserStart() {
   // BEST_EFFORT to start after Chrome startup has completed. This metric is
   // only available starting Windows 10.
   if (base::win::OSInfo::GetInstance()->version() >=
-      base::win::Version::WIN10) {
+      base::win::Version::VERSION_WIN10) { //  GOOGAMCONS-164 FIX
     scoped_refptr<base::SequencedTaskRunner> task_runner =
         base::ThreadPool::CreateSequencedTaskRunner(
             {base::MayBlock(), base::TaskPriority::BEST_EFFORT});

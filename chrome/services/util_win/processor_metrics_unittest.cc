@@ -14,7 +14,7 @@
 TEST(ProcessorMetricsTest, TestRecordProcessorMetrics) {
   // This metric cannot be collected on versions under Windows 10 since the
   // WMI fields needed to log this only exist in Windows 10 and above.
-  if (base::win::OSInfo::GetInstance()->version() < base::win::Version::WIN10)
+  if (base::win::OSInfo::GetInstance()->version() < base::win::Version::VERSION_WIN10) // TODO: GOOGAMCONS-164
     return;
 
   base::win::ScopedCOMInitializer scoped_com_initializer;

@@ -324,7 +324,7 @@ ProcessExitResult InstallerMain(HMODULE module) {
   CHECK(EnableSecureDllLoading());
   EnableProcessHeapMetadataProtection();
 
-  if (base::win::GetVersion() < base::win::Version::WIN10) {
+  if (base::win::GetVersion() < base::win::Version::VERSION_WIN10) { // TODO: GOOGAMCONS-164
     return ProcessExitResult(UNSUPPORTED_WINDOWS_VERSION);
   }
 

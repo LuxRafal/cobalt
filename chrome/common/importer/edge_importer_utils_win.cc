@@ -78,7 +78,7 @@ bool IsEdgeFavoritesLegacyMode() {
 
 bool EdgeImporterCanImport() {
   base::File::Info file_info;
-  if (base::win::GetVersion() < base::win::Version::WIN10)
+  if (base::win::GetVersion() < base::win::Version::VERSION_WIN10) // TODO: GOOGAMCONS-164
     return false;
   return base::GetFileInfo(GetEdgeDataFilePath(), &file_info) &&
          file_info.is_directory;
