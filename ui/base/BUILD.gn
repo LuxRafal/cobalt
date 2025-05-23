@@ -228,9 +228,9 @@ component("base") {
     sources += [
       "dragdrop/drag_source_win.cc",
       "dragdrop/drag_source_win.h",
-      "dragdrop/drop_target_win.cc",
+      
       "dragdrop/drop_target_win.h",
-      "dragdrop/os_exchange_data_provider_win.cc",
+
       "dragdrop/os_exchange_data_provider_win.h",
       "l10n/l10n_util_win.cc",
       "l10n/l10n_util_win.h",
@@ -260,7 +260,7 @@ component("base") {
       "win/mouse_wheel_util.h",
       "win/power_setting_change_listener.cc",
       "win/power_setting_change_listener.h",
-      "win/scoped_ole_initializer.cc",
+
       "win/scoped_ole_initializer.h",
       "win/session_change_observer.cc",
       "win/session_change_observer.h",
@@ -280,6 +280,22 @@ component("base") {
       "dwmapi.lib",
       "wtsapi32.lib",
     ]
+
+    print("/repo/public/ui/base/BUILD.gn: current_os: ${current_os}")
+    if(target_os == "winuwp") { # TODO: GOOGAMCONS-164
+      sources += [
+        "dragdrop/drop_target_uwp.cc",
+        "dragdrop/os_exchange_data_provider_uwp.cc",
+        "win/scoped_ole_initializer_uwp.cc",
+      ]
+    } else {
+      sources += [
+        "dragdrop/drop_target_win.cc",
+        "dragdrop/os_exchange_data_provider_win.cc",
+        "win/scoped_ole_initializer.cc",
+      ]
+    }
+
   }
 
   if (is_mac) {
@@ -511,7 +527,7 @@ component("base") {
 
   if (use_blink) {
     public_deps += [
-      "//ui/base/clipboard:file_info",
+    # TODO: GOOGAMCONS-164  "//ui/base/clipboard:file_info",
       "//ui/events:dom_keycode_converter",
       "//ui/events:events_base",
       "//ui/events/platform",
@@ -589,7 +605,7 @@ component("base") {
   }
 
   if (is_mac || is_win) {
-    deps += [ "//ui/base/clipboard" ]
+    # deps += [ "//ui/base/clipboard" ] # TODO: GOOGAMCONS-164
   }
 
   if (!use_aura) {
@@ -975,7 +991,7 @@ test("ui_base_unittests") {
 
   sources = [
     "class_property_unittest.cc",
-    "clipboard/file_info_unittest.cc",
+    #"clipboard/file_info_unittest.cc", # TODO: GOOGAMCONS-164
     "ime/utf_offset_unittest.cc",
     "interaction/element_identifier_unittest.cc",
     "interaction/element_tracker_unittest.cc",
@@ -1351,10 +1367,10 @@ source_set("base_interactive_ui_tests") {
 }
 
 fuzzer_test("file_info_fuzzer") {
-  sources = [ "clipboard/file_info_fuzzer.cc" ]
+# TODO: GOOGAMCONS-164 sources = [ "clipboard/file_info_fuzzer.cc" ]
   deps = [
     "//base",
-    "//ui/base/clipboard:file_info",
+  # TODO: GOOGAMCONS-164 "//ui/base/clipboard:file_info",
   ]
 }
 
