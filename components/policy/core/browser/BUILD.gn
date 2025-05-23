@@ -24,13 +24,13 @@ source_set("internal") {
     "cloud/message_util.h",
     "configuration_policy_handler.cc",
     "configuration_policy_handler.h",
-    "configuration_policy_handler_list.cc",
+    
     "configuration_policy_handler_list.h",
     "configuration_policy_pref_store.cc",
     "configuration_policy_pref_store.h",
     "policy_conversions.cc",
     "policy_conversions.h",
-    "policy_conversions_client.cc",
+    
     "policy_conversions_client.h",
     "policy_error_map.cc",
     "policy_error_map.h",
@@ -40,7 +40,7 @@ source_set("internal") {
     "url_allowlist_policy_handler.h",
     "url_blocklist_manager.cc",
     "url_blocklist_manager.h",
-    "url_blocklist_policy_handler.cc",
+    
     "url_blocklist_policy_handler.h",
     "url_scheme_list_policy_handler.cc",
     "url_scheme_list_policy_handler.h",
@@ -55,6 +55,13 @@ source_set("internal") {
     "webui/policy_webui_constants.cc",
     "webui/policy_webui_constants.h",
   ]
+
+  # GOOGAMCONS-164: Check if UWP version is needed
+  sources += [
+    "configuration_policy_handler_list.cc",
+    "policy_conversions_client.cc",
+    "url_blocklist_policy_handler.cc",
+    ]
 
   if (!is_chromeos_ash) {
     sources += [

@@ -26,8 +26,13 @@ static_library("safe_browsing_prefs") {
 
 source_set("safe_browsing_policy_handler") {
   sources = [
-    "safe_browsing_policy_handler.cc",
+    
     "safe_browsing_policy_handler.h",
+  ]
+
+  # GOOGAMCONS-164: Check if UWP version is needed.
+  sources += [
+    "safe_browsing_policy_handler.cc",
   ]
 
   configs += [ "//build/config/compiler:wexit_time_destructors" ]

@@ -42,11 +42,16 @@ static_library("core") {
     sources += [
       "blocked_interception_ui.cc",
       "blocked_interception_ui.h",
-      "https_only_mode_policy_handler.cc",
       "https_only_mode_policy_handler.h",
       "mitm_software_ui.cc",
       "mitm_software_ui.h",
     ]
+
+    # GOOGAMCONS-164: Check if UWP version is needed
+    sources += [
+      "https_only_mode_policy_handler.cc",
+    ]
+
   }
 
   deps = [

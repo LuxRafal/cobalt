@@ -10,9 +10,9 @@ static_library("enterprise") {
     "browser/reporting/browser_report_generator.h",
     "browser/reporting/chrome_profile_request_generator.cc",
     "browser/reporting/chrome_profile_request_generator.h",
-    "browser/reporting/cloud_reporting_frequency_policy_handler.cc",
+    
     "browser/reporting/cloud_reporting_frequency_policy_handler.h",
-    "browser/reporting/cloud_reporting_policy_handler.cc",
+    
     "browser/reporting/cloud_reporting_policy_handler.h",
     "browser/reporting/common_pref_names.cc",
     "browser/reporting/common_pref_names.h",
@@ -55,10 +55,17 @@ static_library("enterprise") {
 
   if (!is_ios) {
     sources += [
-      "browser/reporting/cloud_profile_reporting_policy_handler.cc",
+      
       "browser/reporting/cloud_profile_reporting_policy_handler.h",
     ]
   }
+
+  # GOOGAMCONS-164: Check if UWP version is needed
+  sources += [
+    "browser/reporting/cloud_profile_reporting_policy_handler.cc",
+    "browser/reporting/cloud_reporting_frequency_policy_handler.cc",
+    "browser/reporting/cloud_reporting_policy_handler.cc",
+  ]
 
   deps = [
     "//base",

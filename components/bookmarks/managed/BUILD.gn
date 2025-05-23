@@ -8,10 +8,14 @@ static_library("managed") {
     "managed_bookmark_service.h",
     "managed_bookmark_util.cc",
     "managed_bookmark_util.h",
-    "managed_bookmarks_policy_handler.cc",
     "managed_bookmarks_policy_handler.h",
     "managed_bookmarks_tracker.cc",
     "managed_bookmarks_tracker.h",
+  ]
+
+  # GOOGAMCONS-164: Check if UWP version is needed
+  sources += [
+    "managed_bookmarks_policy_handler.cc",
   ]
 
   deps = [

@@ -44,8 +44,13 @@ component("proxy_config") {
 
   if (!is_ios) {
     sources += [
-      "proxy_policy_handler.cc",
+      
       "proxy_policy_handler.h",
+    ]
+
+     # GOOGAMCONS-164: Check if UWP version is needed.
+    sources += [
+      "proxy_policy_handler.cc",
     ]
   }
 }

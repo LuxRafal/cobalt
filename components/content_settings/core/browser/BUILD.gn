@@ -63,11 +63,19 @@ static_library("browser") {
 
   if (!is_ios) {
     sources += [
-      "cookie_settings_policy_handler.cc",
+      
       "cookie_settings_policy_handler.h",
-      "insecure_local_network_policy_handler.cc",
+      
       "insecure_local_network_policy_handler.h",
     ]
+
+
+    # GOOGAMCONS-164: TODO: Check if UWP version is needed
+    sources += [
+      "cookie_settings_policy_handler.cc",
+      "insecure_local_network_policy_handler.cc",
+    ]
+
   }
 
   if (use_blink) {

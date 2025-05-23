@@ -43,7 +43,7 @@ static_library("driver") {
     "sync_client.h",
     "sync_internals_util.cc",
     "sync_internals_util.h",
-    "sync_policy_handler.cc",
+    
     "sync_policy_handler.h",
     "sync_service.cc",
     "sync_service.h",
@@ -69,6 +69,11 @@ static_library("driver") {
     "trusted_vault_client.h",
     "trusted_vault_histograms.cc",
     "trusted_vault_histograms.h",
+  ]
+
+  # GOOGAMCONS-164: Check if UWP version is needed
+  sources += [
+    "sync_policy_handler.cc",
   ]
 
   public_deps = [

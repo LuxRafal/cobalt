@@ -169,19 +169,19 @@ source_set("internal") {
     "policy_loader_command_line.h",
     "policy_logger.cc",
     "policy_logger.h",
-    "policy_map.cc",
+    
     "policy_map.h",
-    "policy_merger.cc",
+    
     "policy_merger.h",
     "policy_migrator.cc",
     "policy_migrator.h",
-    "policy_proto_decoders.cc",
+    
     "policy_proto_decoders.h",
     "policy_service.cc",
     "policy_service.h",
-    "policy_service_impl.cc",
+    
     "policy_service_impl.h",
-    "policy_statistics_collector.cc",
+    
     "policy_statistics_collector.h",
     "proxy_policy_provider.cc",
     "proxy_policy_provider.h",
@@ -205,6 +205,15 @@ source_set("internal") {
     "values_util.cc",
     "values_util.h",
   ]
+
+  # GOOGAMCONS-164: TODO: Check if UWP version is needed
+  sources += [
+    "policy_map.cc",
+    "policy_merger.cc",
+    "policy_proto_decoders.cc",
+    "policy_statistics_collector.cc",
+    "policy_service_impl.cc",
+    ]
 
   configs += [ "//build/config:precompiled_headers" ]
 
@@ -284,9 +293,19 @@ source_set("internal") {
 
   if (is_win || is_mac) {
     sources += [
-      "policy_loader_common.cc",
+      
       "policy_loader_common.h",
     ]
+
+    if(current_os == "winuwp") { # GOOGAMCONS-164: TODO: Add flag: is_winuwp
+    sources += [
+      "policy_loader_common_uwp.cc",
+      ]
+    } else {
+      sources += [
+        "policy_loader_common.cc",
+      ]
+    }
   }
 
   if (is_win || is_mac || is_linux) {

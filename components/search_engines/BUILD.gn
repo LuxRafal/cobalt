@@ -13,7 +13,7 @@ static_library("search_engines") {
   sources = [
     "default_search_manager.cc",
     "default_search_manager.h",
-    "default_search_policy_handler.cc",
+    
     "default_search_policy_handler.h",
     "keyword_table.cc",
     "keyword_table.h",
@@ -48,6 +48,11 @@ static_library("search_engines") {
     "template_url_starter_pack_data.h",
     "util.cc",
     "util.h",
+  ]
+
+  # GOOGAMCONS-164: Check if UWP version is needed
+  sources += [
+    "default_search_policy_handler.cc",
   ]
 
   public_deps = [
