@@ -24,6 +24,11 @@ class ScopedOSInfoOverride;
 }  // namespace test
 }  // namespace base
 
+#ifdef WIN10 // TODO: GOOGAMCONS-164
+#define WIN10_CP _WIN32_WINNT_WIN10
+#undef WIN10
+#endif // #ifdef WIN10
+
 namespace base {
 namespace win {
 
@@ -40,6 +45,7 @@ enum class Version {
   WIN8 = 5,          // Also includes Windows Server 2012.
   WIN8_1 = 6,        // Also includes Windows Server 2012 R2.
   WIN10 = 7,         // Threshold 1: Version 1507, Build 10240.
+  VERSION_WIN10 = 7, // Threshold 1: Version 1507, Build 10240. // TODO: GOOGAMCONS-164
   WIN10_TH2 = 8,     // Threshold 2: Version 1511, Build 10586.
   WIN10_RS1 = 9,     // Redstone 1: Version 1607, Build 14393.
                      // Also includes Windows Server 2016
@@ -242,5 +248,10 @@ BASE_EXPORT Version GetVersion();
 
 }  // namespace win
 }  // namespace base
+
+#ifdef WIN10_CP // TODO: GOOGAMCONS-164
+#define WIN10 _WIN32_WINNT_WIN10
+#undef WIN10_CP
+#endif // #ifdef WIN10_CP
 
 #endif  // BASE_WIN_WINDOWS_VERSION_H_

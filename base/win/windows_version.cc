@@ -397,7 +397,7 @@ Version OSInfo::MajorMinorBuildToVersion(uint32_t major,
     if (build >= 10586) {
       return Version::WIN10_TH2;
     }
-    return Version::WIN10;
+    return Version::VERSION_WIN10; // TODO: GOOGAMCONS-164
   }
 
   if (major > 6) {

@@ -76,8 +76,8 @@ TEST(OSInfo, MajorMinorBuildToVersion) {
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 15063), Version::WIN10_RS2);
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 14393), Version::WIN10_RS1);
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 10586), Version::WIN10_TH2);
-  EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 10240), Version::WIN10);
-  EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 0), Version::WIN10);
+  EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 10240), Version::VERSION_WIN10); // TODO: GOOGAMCONS-164
+  EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(10, 0, 0), Version::VERSION_WIN10); // TODO: GOOGAMCONS-164
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(6, 3, 0), Version::WIN8_1);
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(6, 2, 0), Version::WIN8);
   EXPECT_EQ(OSInfo::MajorMinorBuildToVersion(6, 1, 0), Version::WIN7);
