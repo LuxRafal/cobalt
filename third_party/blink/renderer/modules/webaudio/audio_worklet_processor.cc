@@ -15,6 +15,7 @@
 #include "third_party/blink/renderer/modules/webaudio/audio_worklet_processor_definition.h"
 #include "third_party/blink/renderer/platform/audio/audio_bus.h"
 #include "third_party/blink/renderer/platform/instrumentation/tracing/trace_event.h"
+#include "third_party/blink/renderer/platform/heap/collection_support/heap_vector.h"
 
 namespace blink {
 
@@ -306,8 +307,18 @@ bool AudioWorkletProcessor::ClonePortTopology(
              .To(&new_bus_added)) {
       return false;
     }
-    new_array_buffers.UncheckedAppend(
-        HeapVector<TraceWrapperV8Reference<v8::ArrayBuffer>>());
+
+    // TODO: RAFAL
+    // Ambiguous name lookup of operator delete(void* p): platform/wtf/vector.h and v8/include\cppgc/garbage-collected.h
+    // when bar is appended to new_array_buffers.
+    {
+      TraceWrapperV8Reference<v8::ArrayBuffer> foo;
+      HeapVector<TraceWrapperV8Reference<v8::ArrayBuffer>> bar;
+      bar.push_back(foo);
+      // new_array_buffers.UncheckedAppend(bar);
+    }
+    // new_array_buffers.UncheckedAppend(
+    //     HeapVector<TraceWrapperV8Reference<v8::ArrayBuffer>>());
     new_array_buffers.back().ReserveInitialCapacity(number_of_channels);
 
     for (uint32_t channel_index = 0; channel_index < number_of_channels;
