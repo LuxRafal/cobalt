@@ -67,6 +67,12 @@ libvpx_include_dirs = [
   "source/libvpx",
 ]
 
+if(is_win) {
+  libvpx_include_dirs += [
+    "source/config/win/x64" # GOOGAMCONS-164 ADDED
+  ]
+}
+
 config("libvpx_config") {
   include_dirs = libvpx_include_dirs
 
