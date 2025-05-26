@@ -64,6 +64,12 @@ libaom_include_dirs = [
   "source/libaom",
 ]
 
+if(is_win) {
+  libaom_include_dirs += [
+    "source/config/win/x64" # GOOGAMCONS-164 ADDED
+  ]
+}
+
 config("libaom_config") {
   include_dirs = libaom_include_dirs
 }
