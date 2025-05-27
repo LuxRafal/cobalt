@@ -231,7 +231,8 @@ template("single_msvc_toolchain") {
 
       # Note that the code coverage wrapper scripts assumes that {{source}}
       # comes immediately after /c.
-      command = "$coverage_wrapper$env_wrapper$cl /c {{source}} /Fo{{output}} /nologo $show_includes $sys_include_flags{{defines}} {{include_dirs}} {{cflags}} {{cflags_cc}} /Fd\"$pdbname\""
+      # GOOGAMCONS-164: include path to atl was added
+      command = "$coverage_wrapper$env_wrapper$cl /c {{source}} /Fo{{output}} /nologo $show_includes $sys_include_flags{{defines}} {{include_dirs}} \"-imsvcC:/Program\ Files/Microsoft\ Visual\ Studio/2022/Professional/VC/Tools/MSVC/14.34.31933/atlmfc/include\" {{cflags}} {{cflags_cc}} /Fd\"$pdbname\""
     }
 
     tool("rc") {
@@ -470,8 +471,8 @@ template("single_msvc_toolchain") {
       pdbname = "${dllname}.pdb"
       rspfile = "${dllname}.rsp"
       pool = "//build/toolchain:link_pool($default_toolchain)"
-
-      command = "$linker_wrapper$link /OUT:$dllname /nologo ${sys_lib_flags}/IMPLIB:$libname /DLL /PDB:$pdbname @$rspfile"
+      # GOOGAMCONS-164: explcitly set the names of libraries.
+      command = "$linker_wrapper$link /OUT:$dllname /nologo ${sys_lib_flags}/IMPLIB:$libname /DLL /PDB:$pdbname d3d11.lib d3d12.lib dxguid.lib iso_stdio_wide_specifiers.lib mfplat.lib mfuuid.lib oldnames.lib windowsapp.lib @$rspfile"
 
       default_output_extension = ".dll"
       default_output_dir = "{{root_out_dir}}"
