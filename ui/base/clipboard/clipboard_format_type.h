@@ -30,8 +30,6 @@ namespace ui {
 // Platform neutral holder for native data representation of a clipboard type.
 // Copyable and assignable, since this is an opaque value type.
 
-// TODO: GOOGAMCONS-164
-// TODO: GOOGAMCONS-164: There is something wrong with dllimport\dllexport. In os_exchange_data_provider_uwp.cc dll import stuff is not found.
 class COMPONENT_EXPORT(UI_BASE_CLIPBOARD_TYPES) ClipboardFormatType {
  public:
   ClipboardFormatType();

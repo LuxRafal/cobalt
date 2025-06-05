@@ -282,7 +282,7 @@ component("base") {
     ]
 
     print("/repo/public/ui/base/BUILD.gn: current_os: ${current_os}")
-    if(target_os == "winuwp") { # TODO: GOOGAMCONS-164
+    if(target_os == "winuwp") { # ADDED: GOOGAMCONS-164
       sources += [
         "dragdrop/drop_target_uwp.cc",
         "dragdrop/os_exchange_data_provider_uwp.cc",
@@ -527,7 +527,7 @@ component("base") {
 
   if (use_blink) {
     public_deps += [
-    # TODO: GOOGAMCONS-164  "//ui/base/clipboard:file_info",
+      "//ui/base/clipboard:file_info",
       "//ui/events:dom_keycode_converter",
       "//ui/events:events_base",
       "//ui/events/platform",
@@ -605,7 +605,7 @@ component("base") {
   }
 
   if (is_mac || is_win) {
-    # deps += [ "//ui/base/clipboard" ] # TODO: GOOGAMCONS-164
+    deps += [ "//ui/base/clipboard" ]
   }
 
   if (!use_aura) {
@@ -1367,10 +1367,9 @@ source_set("base_interactive_ui_tests") {
 }
 
 fuzzer_test("file_info_fuzzer") {
-# TODO: GOOGAMCONS-164 sources = [ "clipboard/file_info_fuzzer.cc" ]
   deps = [
     "//base",
-  # TODO: GOOGAMCONS-164 "//ui/base/clipboard:file_info",
+    "//ui/base/clipboard:file_info",
   ]
 }
 
