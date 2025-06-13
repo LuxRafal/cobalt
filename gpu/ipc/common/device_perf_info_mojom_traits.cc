@@ -14,6 +14,7 @@ gpu::mojom::Direct3DFeatureLevel
 EnumTraits<gpu::mojom::Direct3DFeatureLevel, D3D_FEATURE_LEVEL>::ToMojom(
     D3D_FEATURE_LEVEL d3d_feature_level) {
   switch (d3d_feature_level) {
+    case D3D_FEATURE_LEVEL_1_0_GENERIC: // TODO: GOOGAMCONS-164
     case D3D_FEATURE_LEVEL_1_0_CORE:
       return gpu::mojom::Direct3DFeatureLevel::k1_0_Core;
     case D3D_FEATURE_LEVEL_9_1:
