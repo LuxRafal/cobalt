@@ -21,6 +21,35 @@ import("//tools/grit/grit_rule.gni")
 import("//ui/base/ui_features.gni")
 import("//ui/qt/qt.gni")
 
+declare_args() {
+  if(is_win) {
+    absolute_target_gen_dir = rebase_path(root_build_dir)
+  }
+}
+
+if(is_win) {
+  import("//build/toolchain/win/midl.gni")
+
+  action("generate_winrt_headers") {
+    script = "//build/win/run_cppwinrt.py"
+
+    # Path to cppwinrt.exe (usually found in Windows SDK)
+    cppwinrt_exe = "$windows_sdk_path/bin/$windows_sdk_version/x64/cppwinrt.exe"
+
+    outputs = [
+      "$target_gen_dir/winrt/Windows.ApplicationModel.DataTransfer.h",
+    ]
+
+    args = [
+      cppwinrt_exe,
+      "-input", "sdk",  # Use Windows SDK as input
+      "-output", absolute_target_gen_dir,
+      "-verbose",
+    ]
+  }
+
+}
+
 if (is_android) {
   import("//build/config/android/config.gni")
   import("//build/config/android/rules.gni")
@@ -228,7 +257,7 @@ component("base") {
     sources += [
       "dragdrop/drag_source_win.cc",
       "dragdrop/drag_source_win.h",
-      
+
       "dragdrop/drop_target_win.h",
 
       "dragdrop/os_exchange_data_provider_win.h",
@@ -288,6 +317,11 @@ component("base") {
         "dragdrop/os_exchange_data_provider_uwp.cc",
         "win/scoped_ole_initializer_uwp.cc",
       ]
+
+      include_dirs = [
+        target_gen_dir,  # To find the generated headers
+      ]
+
     } else {
       sources += [
         "dragdrop/drop_target_win.cc",
@@ -560,6 +594,20 @@ component("base") {
       "//ui/base/cursor/mojom:cursor_type_shared",
     ]
     deps += [ "//ui/resources:ui_unscaled_resources_grd" ]
+
+    deps += [
+      ":generate_winrt_headers",
+    ]
+
+    cflags_cc = [
+      "/EHsc",
+      "-Wno-unused-function",
+    ]
+
+    defines += [
+      "_HAS_EXCEPTIONS=1",
+    ]
+
   }
 
   if (is_mac) {
