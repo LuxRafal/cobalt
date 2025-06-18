@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "ui/base/dragdrop/os_exchange_data_provider_win.h"
+#include "winrt/Windows.ApplicationModel.DataTransfer.h"
 
 #include <coml2api.h>
 #include <objbase.h>
@@ -31,6 +32,7 @@
 #include "net/base/filename_util.h"
 #include "skia/ext/skia_utils_win.h"
 #include "third_party/skia/include/core/SkBitmap.h"
+#include "ui/base/clipboard/clipboard.h" // TODO: GOOGAMCONS-164
 #include "ui/base/clipboard/clipboard_format_type.h"
 #include "ui/base/clipboard/clipboard_util_win.h"
 #include "ui/base/clipboard/file_info.h"
@@ -44,9 +46,19 @@
 #include "ui/strings/grit/ui_strings.h"
 #include "url/gurl.h"
 
+using namespace winrt::Windows::ApplicationModel;
+
 namespace ui {
 
 namespace {
+
+void CopyToClipboard(const std::wstring& data)
+{
+  DataTransfer::DataPackage dataPackage;
+  dataPackage.SetText(data);
+  DataTransfer::Clipboard::SetContent(dataPackage);
+}
+
 constexpr STGMEDIUM kNullStorageMedium = {.tymed = TYMED_NULL,
                                           .pUnkForRelease = nullptr};
 
@@ -631,16 +643,7 @@ bool OSExchangeDataProviderWin::GetPickledData(
     base::Pickle* data) const {
   DCHECK(data);
   bool success = false;
-  STGMEDIUM medium;
-  FORMATETC format_etc = format.ToFormatEtc();
-  if (SUCCEEDED(source_object_->GetData(&format_etc, &medium))) {
-    if (medium.tymed & TYMED_HGLOBAL) {
-      base::win::ScopedHGlobal<char*> c_data(medium.hGlobal);
-      DCHECK_GT(c_data.Size(), 0u);
-      *data = base::Pickle(c_data.get(), c_data.Size());
-      success = true;
-    }
-    //ReleaseStgMedium(&medium); // TODO: GOOGAMCONS-164
+  // TODO: GOOGAMCONS-164
   }
   return success;
 }
@@ -849,6 +852,7 @@ static STGMEDIUM DuplicateMedium(CLIPFORMAT clipformat,
 
 DataObjectImpl::StoredDataInfo::~StoredDataInfo() {
   //ReleaseStgMedium(&medium); // TODO: GOOGAMCONS-164
+  DataTransfer::Clipboard::Clear(); // TODO: Temporary. Just for the test.
   if (downloader.get())
     downloader->Stop();
 }
