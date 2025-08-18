@@ -642,10 +642,7 @@ bool OSExchangeDataProviderWin::GetPickledData(
     const ClipboardFormatType& format,
     base::Pickle* data) const {
   DCHECK(data);
-  bool success = false;
-  // TODO: GOOGAMCONS-164
-  }
-  return success;
+  return false;
 }
 
 bool OSExchangeDataProviderWin::GetFileContents(
