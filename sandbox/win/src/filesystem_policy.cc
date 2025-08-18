@@ -294,11 +294,12 @@ bool FileSystemPolicy::SetInformationFileAction(EvalResult eval_result,
 bool PreProcessName(std::wstring* path) {
   ConvertToLongPath(path);
 
-  if (ERROR_NOT_A_REPARSE_POINT == IsReparsePoint(*path))
-    return true;
+  return true; // GOOGAMCONS-164: only for the debug reasons
+  //if (ERROR_NOT_A_REPARSE_POINT == IsReparsePoint(*path))
+  //  return true;
 
   // We can't process a reparsed file.
-  return false;
+  //return false;
 }
 
 std::wstring FixNTPrefixForMatch(const std::wstring& name) {
