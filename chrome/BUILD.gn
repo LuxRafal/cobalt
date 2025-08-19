@@ -187,9 +187,19 @@ if (!is_android && !is_mac) {
       }
 
       if (is_win) {
+        if(target_os == "winuwp") { # TODO: GOOGAMCONS-164: Add flag: is_winuwp
+          sources += [
+            "app/chrome_exe_main_uwp.cc",
+          ]
+        } else {
+          sources += [
+            "app/chrome_exe_main_win.cc",
+          ]
+        }
+
         sources += [
           "app/chrome_exe.rc",
-          "app/chrome_exe_main_win.cc",
+
           "app/delay_load_failure_hook_win.cc",
           "app/delay_load_failure_hook_win.h",
           "app/main_dll_loader_win.cc",
